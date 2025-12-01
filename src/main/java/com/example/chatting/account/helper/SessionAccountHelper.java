@@ -29,7 +29,7 @@ public class SessionAccountHelper implements AccountHelper {
     public String login(AccountLoginRequest loginReq, HttpServletRequest request, HttpServletResponse response) {
         // memberService.find 아이디 비밀번호 파라미터로 회원 조회 -> 존재하면 Member객체 반환
         Member member = memberService.find(loginReq.getLoginId(), loginReq.getLoginPw());
-        if (member == null) {
+        if(member == null) {
             return null;
         }
         // 로그인 정보를 세션에 등록
@@ -42,12 +42,14 @@ public class SessionAccountHelper implements AccountHelper {
     // 회원 아이디 조회
     @Override
     public Integer getMemberId(HttpServletRequest request) {
+        // 멤버고유번호(pk)와 HTTP 요청 정보 객체를 getSession에 담아서 보냄
         Object memberId = HttpUtils.getSession(request, AccountConstants.Member_ID_NAME);
-        if (memberId != null) {
-            return (int)memberId;
+        if(memberId != null) {
+            return (int) memberId;
         }
-        return 0;
+        return null;
     }
+
 
     // 로그인 여부 확인
     @Override

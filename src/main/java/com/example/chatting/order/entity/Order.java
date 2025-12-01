@@ -25,13 +25,10 @@ public class Order {
     @Column(length = 500, nullable = false)
     private String address;
 
-    @Column(name = "option_type", length = 10, nullable = false)
-    private String optionType;   // call / put
-
     @Column(length = 10, nullable = false)
     private String payment;
 
-    @Column(length = 16)
+    @Column(length = 255)
     private String cardNumber;
 
     @Column(nullable = false)
@@ -44,11 +41,10 @@ public class Order {
     public Order() {}
 
 
-    public Order(Integer memberId, String name, String address, String optionType, String payment, String cardNumber, Long amount) {
+    public Order(Integer memberId, String name, String address, String payment, String cardNumber, Long amount) {
         this.memberId = memberId;
         this.name = name;
         this.address = address;
-        this.optionType = optionType;
         this.payment = payment;
         this.cardNumber = cardNumber;
         this.amount = amount;
@@ -59,7 +55,6 @@ public class Order {
                 .id(id)
                 .name(name)
                 .address(address)
-                .optionType(optionType)
                 .payment(payment)
                 .amount(amount)
                 .created(created)

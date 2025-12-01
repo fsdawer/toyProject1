@@ -9,6 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
     @GetMapping("/api/greeting")
     public String greeting() {
-        return "Hello Spring boot!";
+        return "/index.html";
     }
 }

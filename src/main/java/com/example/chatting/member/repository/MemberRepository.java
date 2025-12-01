@@ -9,4 +9,7 @@ import java.util.Optional;
 public interface MemberRepository extends JpaRepository<Member, Integer> {
     // 아이디와 패스워드로 회원 정보를 조회
     Optional<Member> findByLoginIdAndLoginPw(String login_id, String login_pw);
+
+    // 아이디로 회원 정보 조회
+    Optional<Member> findByLoginId(String login_id);
 }

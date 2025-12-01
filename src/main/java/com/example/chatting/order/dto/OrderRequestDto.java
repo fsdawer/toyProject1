@@ -13,7 +13,6 @@ import java.util.List;
 @Setter
 public class OrderRequestDto {
     private String name;
-    private String optionType;   // call / put
     private String address;
     private String payment;
     private String cardNumber;
@@ -25,7 +24,6 @@ public class OrderRequestDto {
                 memberId,
                 this.name,
                 this.address,
-                this.optionType,
                 this.payment,
                 this.cardNumber,
                 this.amount

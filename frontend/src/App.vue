@@ -39,6 +39,9 @@ watch(() => route.path, () => {
   <!-- 로그인 체크 여부 확인 후 출력-->
   <template v-if="accountStore.checked"> <!-- ③ -->
     <Header/>
+    <section class="promo text-center py-3 bg-light border-bottom">
+      오늘 자취생들이 먹은 음식 랭킹은?
+    </section>
     <main>
       <!-- 라우터 뷰 -->
       <router-view></router-view>
@@ -47,3 +50,8 @@ watch(() => route.path, () => {
   </template>
 </template>
 
+<style scoped>
+.promo {
+  font-weight: 600;
+}
+</style>

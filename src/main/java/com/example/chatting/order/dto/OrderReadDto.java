@@ -18,7 +18,6 @@ public class OrderReadDto {
     private int id;
     private String name;
     private String address;
-    private String optionType;  // call / put
     private String payment;
     private Long amount;
     private LocalDateTime created;

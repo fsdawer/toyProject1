@@ -12,6 +12,10 @@ const props = defineProps({ // ①
     name: String,
     price: Number,
     discountPer: Number
+  },
+  rank: {
+    type: Number,
+    default: null
   }
 });
 
@@ -29,7 +33,13 @@ const router = useRouter(); // ①
 const put = async () => { // ②
   const res = await addItem(props.item.id);
 
-  if (res.status === 200 && window.confirm('장바구니에 상품을 담았습니다. 장바구니로 이동하시겠습니까?')) {
+  if (!res || res.status === 401) {
+    window.alert("로그인 후 이용해주세요.");
+    await router.push("/login");
+    return;
+  }
+
+  if (res.status === 200 && window.confirm("장바구니에 상품을 담았습니다. 장바구니로 이동하시겠습니까?")) {
     await router.push("/cart");
   }
 };
@@ -40,6 +50,13 @@ const put = async () => { // ②
     <!-- 상품 사진 출력 -->
     <span class="img" :style="{backgroundImage: `url(${props.item.imgPath})`}"
           :aria-label="`상품 사진(${props.item.name})`"></span>
+    <span v-if="props.rank" class="rank-badge" :class="{
+        'rank-first': props.rank === 1,
+        'rank-second': props.rank === 2,
+        'rank-third': props.rank === 3
+      }">
+      {{ props.rank }}등
+    </span>
     <div class="card-body">
       <p class="card-text">
         <!-- 상품 이름 -->
@@ -60,6 +77,8 @@ const put = async () => { // ②
 
 <style lang="scss" scoped>
 .card {
+  position: relative;
+
   .img { // ⑤
     display: inline-block;
     width: 100%;
@@ -71,5 +90,31 @@ const put = async () => { // ②
   .card-body .price { // ⑥
     text-decoration: line-through;
   }
+}
+
+.rank-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+}
+
+.rank-first {
+  background: linear-gradient(135deg, #fceabb, #f8b500);
+  color: #4a3200;
+}
+
+.rank-second {
+  background: linear-gradient(135deg, #e0e0e0, #bdbdbd);
+  color: #3f3f3f;
+}
+
+.rank-third {
+  background: linear-gradient(135deg, #f7d9c4, #d08c60);
+  color: #4a2b16;
 }
 </style>

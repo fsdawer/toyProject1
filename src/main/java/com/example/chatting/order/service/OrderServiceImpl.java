@@ -1,6 +1,7 @@
 package com.example.chatting.order.service;
 
 import com.example.chatting.cart.repository.service.CartService;
+import com.example.chatting.common.util.EncryptionUtils.EncryptionUtils;
 import com.example.chatting.item.dto.ItemDto;
 import com.example.chatting.item.repository.service.ItemService;
 import com.example.chatting.order.dto.OrderReadDto;
@@ -74,6 +75,11 @@ public class OrderServiceImpl implements OrderService {
 
         // 주문 요청에 최종 결제 금액 입력
         orderRequest.setAmount(amount);
+
+        // 결제 수단이 카드일 때 카드 번호 암호화
+        if ("card".equals(orderRequest.getPayment())) {
+            orderRequest.setCardNumber(EncryptionUtils.encrypt(orderRequest.getCardNumber()));
+        }
 
         // 주문 저장
         // OrderRequest DTO → Order 엔티티 변환

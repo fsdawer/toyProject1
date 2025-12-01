@@ -14,8 +14,7 @@ const state = reactive({ // ②
     name: "",
     address: "",
     payment: "card",
-    cardNumber: "",
-    optionType: "call"
+    cardNumber: ""
   }
 });
 
@@ -32,6 +31,28 @@ const computedTotalPrice = computed(() => { // ③
 
 // 주문 데이터 제출
 const submit = async () => { // ④
+// 🔥 1. 기본 값 검증
+  if (!state.form.name.trim()) {
+    window.alert("주문자 이름을 입력해주세요.");
+    return;
+  }
+
+  if (!state.form.address.trim()) {
+    window.alert("주소를 입력해주세요.");
+    return;
+  }
+
+  // 🔥 2. 결제 수단 검증
+  if (state.form.payment === "card" && !state.form.cardNumber.trim()) {
+    window.alert("카드 번호를 입력해주세요.");
+    return;
+  }
+
+  if (state.items.length === 0) {
+    window.alert("구입할 상품이 없습니다.");
+    return;
+  }
+
   if (state.form.payment !== "card") { // 결제 수단이 카드가 아니면
     state.form.cardNumber = "";
   }
@@ -107,23 +128,6 @@ const submit = async () => { // ④
             <div class="col-12 pt-1">
               <label for="address" class="form-label">주소</label>
               <input type="text" class="form-control p-3" id="address" v-model="state.form.address"/> <!-- ⑩ -->
-            </div>
-          </div>
-          <div class="h5 mt-5 mb-3">
-            <b>옵션 선택</b>
-          </div>
-
-          <div class="my-3">
-            <div class="form-check">
-              <input type="radio" id="call" name="option" class="form-check-input"
-                     value="call" v-model="state.form.optionType">
-              <label class="form-check-label" for="call">콜옵션(Call)</label>
-            </div>
-
-            <div class="form-check">
-              <input type="radio" id="put" name="option" class="form-check-input"
-                     value="put" v-model="state.form.optionType">
-              <label class="form-check-label" for="put">풋옵션(Put)</label>
             </div>
           </div>
           <div class="h5 mt-5 mb-3">

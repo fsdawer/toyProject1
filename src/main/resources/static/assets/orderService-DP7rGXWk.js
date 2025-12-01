@@ -1,0 +1,1 @@
+import{h as s}from "./index-Dr12_3DT.js";const o= r=>s.post("/v2/api/orders",r).catch(e=>e.response),a= r=>s.get("/v2/api/orders",r).catch(e=>e.response),p= r=>s.get(`/v2/api/orders/${r}`).catch(e=>e.response);export{o as a,p as b,a as g};

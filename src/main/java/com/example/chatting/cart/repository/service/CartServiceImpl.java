@@ -27,7 +27,7 @@ public class CartServiceImpl implements CartService {
     @Override
     public CartRead find(Integer memberId, Integer itemId) {
         Optional<Cart> cartOptional = cartRepository.findByMemberIdAndItemId(memberId, itemId);
-        return cartOptional.map(Cart::toRead).orElse(null);
+        return cartOptional.map(Cart::toRead).orElse(null); // cartOptional에 값이 있으면 → cart.toRead() 실행 / cartOptional이 비어 있으면 → null 반환
     }
 
 

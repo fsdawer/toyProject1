@@ -1,20 +1,20 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import {defineStore} from 'pinia'
 
-// 계정 데이터를 다루는 계정 스토어
-export const useAccountStore = defineStore("account", { // ①
+export const useAccountStore = defineStore("account", {
     state: () => ({
-        checked: false, //  사용자의 로그인 체크 여부를
-        loggedIn: false, //  사용자의 로그인
+        checked: false,
+        loggedIn: false,
+        accessToken: "", // ①  액세스 토큰 프로퍼티 문자열 타입
     }),
     actions: {
-        setChecked(val) { //
+        setChecked(val) {
             this.checked = val;
         },
-        setLoggedIn(val) { //
+        setLoggedIn(val) {
             this.loggedIn = val;
+        },
+        setAccessToken(val) { // ② 액세스 토큰의 값 수정 메서드
+            this.accessToken = val;
         },
     },
 });
-
-

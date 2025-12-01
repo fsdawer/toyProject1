@@ -31,7 +31,6 @@ const load = async () => { // ②
           <th class="text-center">번호</th>
           <th>주문자명</th>
           <th>결제 수단</th>
-          <th>옵션</th>
           <th>결제 금액</th>
           <th>결제일시</th>
           <th>자세히 보기</th>
@@ -42,9 +41,6 @@ const load = async () => { // ②
           <td class="text-center">{{ state.orders.length - idx }}</td>
           <td>{{ o.name }}</td>
           <td>{{ o.payment === 'card' ? '카드' : '무통장입금' }}</td>
-          <td>
-            {{ o.option === 'call' ? '콜옵션' : '풋옵션' }}
-          </td>
           <td>{{ o.amount.toLocaleString() }}원</td>
           <td>{{ o.created.toLocaleString() }}</td>
           <td>
